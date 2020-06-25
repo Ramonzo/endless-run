@@ -1,7 +1,8 @@
 //To controll game
 let Game;
-
-let stateGroup = ['menu', 'gameplay', 'pause', 'gameover'];
+let difficulty = ['easy', 'medium', 'hard'];
+//To control game states
+let stateGroup = ['menu', 'play', 'pause', 'gameover'];
 let state = stateGroup[0];
 //To controll game assets
 let spriteFormat = '.png';
@@ -21,5 +22,5 @@ let soundEffectPath = 'effects/';
 let soundEffectNames = [];
 let soundEffectFiles = [];
 let soundTrackPath = 'tracks/';
-let soundTrackNames = ['gameover_sound_track','gameplay_sound_track','menu_sound_track'];
+let soundTrackNames = ['menu_sound_track', 'gameplay_sound_track', 'gameover_sound_track'];
 let soundTrackFiles = [];

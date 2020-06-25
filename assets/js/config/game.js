@@ -1,6 +1,6 @@
 class Game{
     constructor(){
-        this.player;
+        this.player = new Player();
         this.enemy = [];
     }
     load(){
@@ -22,12 +22,15 @@ class Game{
         });
     }
     drawLoad(){
-        
     }
     setup(){
-
     }
     draw(){
-
+    }
+    move(){
+    }
+    reset(){
+        this.player = new Player();
+        this.enemy = [];
     }
 }
