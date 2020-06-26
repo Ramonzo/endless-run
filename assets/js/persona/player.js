@@ -5,12 +5,14 @@ class Player extends Animation{
         this.initialY = this.y;
         this.life = 3;
         this.points = 0;
+        this.velocity = 0;
         this.velocityMove = 3;
         this.jumpCount = 0;
         this.jumpMax = 2;
         this.velocityJump = 0;
         this.velocityMax = 20;
         this.gravity = 3;
+        this.startTime = millis();
     }
     draw(){
         this.render(this.actualAction);
@@ -45,7 +47,8 @@ class Player extends Animation{
         }
     }
     move(){
-        let direction = 0;
+        this.velocity = parseInt(this.points/300)+this.velocityMove;
+        this.points += parseInt((this.velocity * ((millis()-this.startTime) / 60000))/2);
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8){
                 this.x = this.x + this.velocityMove;

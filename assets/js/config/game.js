@@ -46,9 +46,12 @@ class Game{
         state = stateGroup[0];
     }
     play(){
-        soundTrackFiles[0].stop();
-        soundTrackFiles[1].loop();
-    }ww
+        if(!soundTrackFiles[1].isPlaying()){
+            soundTrackFiles[0].stop();
+            soundTrackFiles[1].loop();
+        }
+        state = stateGroup[1];
+    }
     drawLoad(){
     }
     setup(){

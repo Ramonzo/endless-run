@@ -14,9 +14,7 @@ function setup() {
 
 function draw() {
     background(255);
-    if(state == stateGroup[0]){
-        game.play();
-    }else{
+    if(state == stateGroup[1]){
         game.move();
         game.draw();
     }
@@ -25,7 +23,7 @@ function draw() {
 function keyPressed() {
     switch(key){
         case 'p':
-            state = stateGroup[1];
+            game.play();
         break;
         case 'w':
             if(state == stateGroup[1]){
