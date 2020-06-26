@@ -1,6 +1,6 @@
 class Player extends Animation{
     constructor(spriteId, x, y){
-        super(spriteId, x, y);
+        super(spriteId, x, y, [5, 8]);
         this.initialX = this.x;
         this.initialY = this.y;
         this.life = 3;
@@ -15,6 +15,7 @@ class Player extends Animation{
     draw(){
         this.render(this.actualAction);
         this.applyGravity();
+
         if(isDebug){
             noFill();
             rectMode(CENTER);
@@ -42,5 +43,7 @@ class Player extends Animation{
         }
     }
     move(){
+    }
+    collision(){
     }
 }

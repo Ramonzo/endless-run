@@ -1,11 +1,11 @@
 class Animation{
-    constructor(spriteId, x, y){
+    constructor(spriteId, x, y, precision){
         this.spriteId = spriteId;
         this.frameCount = 0;
         this.actualAction = 'walk';
-        
+        this.precision = precision;
         this.x = x;
-        this.y = y - skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['h'];
+        this.y = y - (skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['h']);
     }
     render(){
         imageMode(CENTER);
