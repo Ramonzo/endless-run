@@ -5,7 +5,7 @@ class Game{
         soundFormats(soundFormat);
         //loading enemy sprites
         enemySpriteNames.forEach((name) => {
-            let file = spritePath+enemySpritePrefix+name+spriteFormat;
+            let file = spritePersonaPath+enemySpritePrefix+name+spriteFormat;
             enemySpriteFiles.push(loadImage(file));
             if(isDebug){
                 console.log(file);
@@ -13,8 +13,16 @@ class Game{
         });
         //loading player sprites
         playerSpriteNames.forEach((name) => {
-            let file = spritePath+playerSpritePrefix+name+spriteFormat;
+            let file = spritePersonaPath+playerSpritePrefix+name+spriteFormat;
             playerSpriteFiles[name] = loadImage(file);
+            if(isDebug){
+                console.log(file);
+            }
+        });
+        //loading scenary sprites
+        scenarySpriteNames.forEach((name) => {
+            let file = spriteScenaryPath+scenarySpritePrefix+name+spriteFormat;
+            scenarySpriteFiles.push(loadImage(file));
             if(isDebug){
                 console.log(file);
             }
@@ -41,9 +49,17 @@ class Game{
     setup(){
     }
     draw(){
+        scenaries[0].draw();
+        scenaries[1].draw();
+
         player.draw();
+
+        scenaries[2].draw();
     }
     move(){
+        scenaries.forEach((item) => {
+            item.move();
+        });
         player.move();
     }
     reset(){
