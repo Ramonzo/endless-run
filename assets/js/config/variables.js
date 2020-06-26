@@ -17,16 +17,34 @@ let soundPath = 'assets/sounds/';
 let playerSpritePrefix = 'player_';
 let playerSpriteNames = ['default'];
 let skinParameters = {
-                        'default':
-                                {
-                                    'spriteId':0,
-                                    'w':76, 
-                                    'h':78,
-                                    'positionX': 0,
-                                    'positionY': 124,
-                                    'spriteW': 38,
-                                    'spriteH': 39,
-                                    'frames': 8
+                        'default':{
+                                    'walk':{
+                                        'w':76, 
+                                        'h':78,
+                                        'positionX': 38,
+                                        'positionY': 124,
+                                        'spriteW': 38,
+                                        'spriteH': 39,
+                                        'frames': 8
+                                    },
+                                    'jump':{
+                                        'w':76, 
+                                        'h':78,
+                                        'positionX': 0,
+                                        'positionY': 244,
+                                        'spriteW': 38,
+                                        'spriteH': 39,
+                                        'frames': 1
+                                    },
+                                    'falling':{
+                                        'w':76, 
+                                        'h':78,
+                                        'positionX': 39,
+                                        'positionY': 244,
+                                        'spriteW': 38,
+                                        'spriteH': 48,
+                                        'frames': 1
+                                    }
                                 }
                     }
 let playerSpriteFiles = [];

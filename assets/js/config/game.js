@@ -14,7 +14,7 @@ class Game{
         //loading player sprites
         playerSpriteNames.forEach((name) => {
             let file = spritePath+playerSpritePrefix+name+spriteFormat;
-            playerSpriteFiles.push(loadImage(file));
+            playerSpriteFiles[name] = loadImage(file);
             if(isDebug){
                 console.log(file);
             }
@@ -47,7 +47,7 @@ class Game{
         player.move();
     }
     reset(){
-        player = new Player();
+        player = new Player(0, 100, height - skinParameters[playerSpriteNames[0]]['h']);
         enemies = [];
     }
 }
