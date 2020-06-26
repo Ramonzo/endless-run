@@ -1,35 +1,54 @@
 class Animation{
-    constructor(spriteId, x, y, precision){
-        this.spriteId = spriteId;
-        this.frameCount = 0;
+    constructor(sprite, x, y, precision){
         this.actualAction = 'walk';
+        this.spriteName = sprite;
+        this.sprite = skinParameters[this.spriteName];
+        this.frameCount = 0;
         this.precision = precision;
         this.x = x;
-        this.y = y - (skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['h']);
+        this.y = y - (this.sprite[this.actualAction]['h']);
     }
     render(){
         imageMode(CENTER);
-        image(playerSpriteFiles[playerSpriteNames[this.spriteId]], 
+        image(playerSpriteFiles[this.spriteName], 
             this.x, 
             this.y,
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['w'],
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['h'],
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['positionX']+(skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['spriteW']*this.frameCount),
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['positionY'],
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['spriteW'],
-            skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['spriteH']
+            this.sprite[this.actualAction]['w'],
+            this.sprite[this.actualAction]['h'],
+            this.sprite[this.actualAction]['positionX']+(this.sprite[this.actualAction]['spriteW']*this.frameCount),
+            this.sprite[this.actualAction]['positionY'],
+            this.sprite[this.actualAction]['spriteW'],
+            this.sprite[this.actualAction]['spriteH']
             );
         this.animate();
     }
     animate(){
         if(frameCount % 4 == 0){
-            this.frameCount + 1 < skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['frames'] ? this.frameCount += 1 : this.frameCount = 0;
+            this.frameCount + 1 < this.sprite[this.actualAction]['frames'] ? this.frameCount += 1 : this.frameCount = 0;
         }
         
     }
     //To change skins
-    changeSprite(spriteId){
-        this.spriteId = spriteId;
+    changeSprite(spriteName){
+        this.spriteName = spriteName;
         this.frameCount = 0;
+    }
+    _collisionBox(){
+        if(isDebug){
+            noFill();
+            stroke(color('#0A8901'));
+            rectMode(CENTER);
+            rect(this.x, this.y, this.sprite[this.actualAction]['w']*this.precision[0], this.sprite[this.actualAction]['h']*this.precision[1]);
+            noStroke();
+        }
+    }
+    _imageBox(){
+        if(isDebug){
+            noFill();
+            stroke(color('#000089'));
+            rectMode(CENTER);
+            rect(this.x, this.y, this.sprite[this.actualAction]['w'], this.sprite[this.actualAction]['h']);
+            noStroke();
+        }
     }
 }

@@ -6,7 +6,7 @@ class Game{
         //loading enemy sprites
         enemySpriteNames.forEach((name) => {
             let file = spritePersonaPath+enemySpritePrefix+name+spriteFormat;
-            enemySpriteFiles.push(loadImage(file));
+            enemySpriteFiles[name] = loadImage(file);
             if(isDebug){
                 console.log(file);
             }
@@ -55,7 +55,7 @@ class Game{
     drawLoad(){
     }
     setup(){
-        player = new Player(0, 100, height);
+        player = new Player(playerSpriteNames[0], 100, height);
 
         scenaries = [
                     new Scenary(scenarySpriteFiles[0], height/2, width, height, 3),
@@ -64,19 +64,28 @@ class Game{
                 ];
 
         soundTrackFiles[0].loop();
+        enemies[0] = new Enemy(playerSpriteNames[0], width, height);
     }
     draw(){
+        //Back draw
         scenaries[0].draw();
         scenaries[1].draw();
-
+        //Middle draw
         player.draw();
 
+        enemies.forEach((enemy) => {
+            enemy.draw();
+        });
+        //Top draw
         scenaries[2].draw();
     }
     move(){
         let direction = player.move();
         scenaries.forEach((item) => {
-            item.move(direction);
+            item.move(direction, player.velocity);
+        });
+        enemies.forEach((enemy) => {
+            enemy.move(direction, player.velocity);
         });
     }
     reset(){

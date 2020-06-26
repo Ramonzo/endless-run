@@ -1,6 +1,6 @@
 class Player extends Animation{
-    constructor(spriteId, x, y){
-        super(spriteId, x, y, [5, 8]);
+    constructor(sprite, x, y){
+        super(sprite, x, y, [.5, .8]);
         this.initialX = this.x;
         this.initialY = this.y;
         this.life = 3;
@@ -13,16 +13,15 @@ class Player extends Animation{
         this.velocityMax = 20;
         this.gravity = 3;
         this.startTime = millis();
+        this.stamina = 100;
+        this.canRun = true;
     }
     draw(){
-        this.render(this.actualAction);
+        this.render();
         this.applyGravity();
 
-        if(isDebug){
-            noFill();
-            rectMode(CENTER);
-            rect(this.x, this.y, skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['w'], skinParameters[playerSpriteNames[this.spriteId]][this.actualAction]['h']);
-        }
+        this._collisionBox();
+        this._imageBox();
     }
     jump(){
         if(this.jumpCount < this.jumpMax){
@@ -47,14 +46,25 @@ class Player extends Animation{
         }
     }
     move(){
-        this.velocity = parseInt(this.points/300)+this.velocityMove;
+        this.velocity = this.velocity < 100 ? parseInt(this.points/3000)+this.velocityMove : 100;
         this.points += parseInt((this.velocity * ((millis()-this.startTime) / 60000))/2);
         if(keyIsDown(68)){//key => d
-            if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8){
-                this.x = this.x + this.velocityMove;
-                return this.velocityMove;
+            if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
+                if(this.stamina > 0){
+                    this.stamina--;
+                    this.x = this.x + this.velocityMove;
+                    return this.velocityMove;
+                }
+                else{
+                    this.canRun = false;
+                }
             }
-        }else if(keyIsDown(65)){//key => a
+        }else{
+            if(this.stamina < 100){
+                this.stamina += .5
+            }else{
+                this.canRun = true;
+            }
             if(this.x - this.velocityMove >= this.initialX && this.x - this.velocityMove <= width/10*8){
                 this.x = this.x - this.velocityMove;
                 return -this.velocityMove/2;
