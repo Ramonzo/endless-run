@@ -5,7 +5,7 @@ class Player extends Animation{
         this.initialY = this.y;
         this.life = 3;
         this.points = 0;
-        this.velocityMove = 2;
+        this.velocityMove = 3;
         this.jumpCount = 0;
         this.jumpMax = 2;
         this.velocityJump = 0;
@@ -47,14 +47,17 @@ class Player extends Animation{
     move(){
         let direction = 0;
         if(keyIsDown(68)){//key => d
-            direction = this.velocityMove;
+            if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8){
+                this.x = this.x + this.velocityMove;
+                return this.velocityMove;
+            }
         }else if(keyIsDown(65)){//key => a
-            direction = -this.velocityMove;
+            if(this.x - this.velocityMove >= this.initialX && this.x - this.velocityMove <= width/10*8){
+                this.x = this.x - this.velocityMove;
+                return -this.velocityMove/2;
+            }
         }
-        if(this.x + direction >= this.initialX && this.x + direction <= width/10*8){
-            this.x = this.x + direction;
-        }
-        return direction;
+        return 0;
     }
     collision(){
     }
