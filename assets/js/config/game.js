@@ -43,10 +43,24 @@ class Game{
                 console.log(file);
             }
         });
+        state = stateGroup[0];
     }
+    play(){
+        soundTrackFiles[0].stop();
+        soundTrackFiles[1].loop();
+    }ww
     drawLoad(){
     }
     setup(){
+        player = new Player(0, 100, height);
+
+        scenaries = [
+                    new Scenary(scenarySpriteFiles[0], height/2, width, height, 3),
+                    new Scenary(scenarySpriteFiles[1], height*60/100, width, height/7*4, 5),
+                    new Scenary(scenarySpriteFiles[2], height*95/100, width, height/15*2, 4)
+                ];
+
+        soundTrackFiles[0].loop();
     }
     draw(){
         scenaries[0].draw();
@@ -57,10 +71,10 @@ class Game{
         scenaries[2].draw();
     }
     move(){
+        let direction = player.move();
         scenaries.forEach((item) => {
-            item.move();
+            item.move(direction);
         });
-        player.move();
     }
     reset(){
         player = new Player(0, 100, height - skinParameters[playerSpriteNames[0]]['h']);
