@@ -1,17 +1,34 @@
 //To controll game
-let Game;
+let game;
 let difficulty = ['easy', 'medium', 'hard'];
+let isDebug = true;
+let canvas;
+let player;
+let enemies = [];
 //To control game states
 let stateGroup = ['menu', 'play', 'pause', 'gameover'];
 let state = stateGroup[0];
 //To controll game assets
 let spriteFormat = '.png';
-let soundFormat = '.wav';
-let spritePath = '../../sprites/persona/';
-let soundPath = '../../sounds/';
+let soundFormat = 'wav';
+let spritePath = 'assets/sprites/persona/';
+let soundPath = 'assets/sounds/';
 
 let playerSpritePrefix = 'player_';
 let playerSpriteNames = ['default'];
+let skinParameters = {
+                        'default':
+                                {
+                                    'spriteId':0,
+                                    'w':76, 
+                                    'h':78,
+                                    'positionX': 0,
+                                    'positionY': 124,
+                                    'spriteW': 38,
+                                    'spriteH': 39,
+                                    'frames': 8
+                                }
+                    }
 let playerSpriteFiles = [];
 
 let enemySpritePrefix = 'enemy_';

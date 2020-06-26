@@ -1,24 +1,39 @@
 class Game{
     constructor(){
-        this.player = new Player();
-        this.enemy = [];
     }
     load(){
+        soundFormats(soundFormat);
         //loading enemy sprites
         enemySpriteNames.forEach((name) => {
-            enemySpriteFiles.push(loadImage(spritePath+enemySpritePrefix+name+spriteFormat));
+            let file = spritePath+enemySpritePrefix+name+spriteFormat;
+            enemySpriteFiles.push(loadImage(file));
+            if(isDebug){
+                console.log(file);
+            }
         });
         //loading player sprites
         playerSpriteNames.forEach((name) => {
-            playerSpriteFiles.push(loadImage(spritePath+playerSpritePrefix+name+spriteFormat));
+            let file = spritePath+playerSpritePrefix+name+spriteFormat;
+            playerSpriteFiles.push(loadImage(file));
+            if(isDebug){
+                console.log(file);
+            }
         });
         //loading sound tracks
         soundTrackNames.forEach((name) => {
-            soundTrackFiles.push(loadSound(soundPath+soundTrackPath+name+soundFormat));
+            let file = soundPath+soundTrackPath+name;
+            soundTrackFiles.push(loadSound(file));
+            if(isDebug){
+                console.log(file);
+            }
         });
         //loading sound effects
         soundEffectNames.forEach((name) => {
-            soundEffectFiles.push(loadSound(soundPath+soundEffectPath+name+soundFormat));
+            let file = soundPath+soundEffectPath+name;
+            soundEffectFiles.push(loadSound(file));
+            if(isDebug){
+                console.log(file);
+            }
         });
     }
     drawLoad(){
@@ -26,11 +41,13 @@ class Game{
     setup(){
     }
     draw(){
+        player.draw();
     }
     move(){
+        player.move();
     }
     reset(){
-        this.player = new Player();
-        this.enemy = [];
+        player = new Player();
+        enemies = [];
     }
 }
