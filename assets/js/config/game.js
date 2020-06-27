@@ -38,7 +38,7 @@ class Game{
         //loading sound effects
         soundEffectNames.forEach((name) => {
             let file = soundPath+soundEffectPath+name;
-            soundEffectFiles.push(loadSound(file));
+            soundEffectFiles[name] = loadSound(file);
             if(isDebug){
                 console.log(file);
             }

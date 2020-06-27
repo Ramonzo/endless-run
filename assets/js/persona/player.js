@@ -15,16 +15,21 @@ class Player extends Animation{
         this.startTime = millis();
         this.stamina = 100;
         this.canRun = true;
+        this.lastHundred = 0;
     }
     draw(){
         this.render();
         this.applyGravity();
 
-        this._collisionBox();
-        this._imageBox();
+        if(isDebug){
+            console.log('velocity: '+ this.velocity);
+            console.log('points: '+ this.points);
+            console.log('stamina: '+ this.stamina);
+        }
     }
     jump(){
         if(this.jumpCount < this.jumpMax){
+            soundEffectFiles['jump'].play();
             this.jumpCount++;
             this.velocityJump = -this.velocityMax;
             this.actualAction = 'jump';
@@ -49,10 +54,16 @@ class Player extends Animation{
         this.velocity = this.velocity < 100 ? parseInt(this.points/(1000+(this.velocity*10)))+this.velocityMove : 100;
         let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
         this.points = int(newPoint*100);
-        if(isDebug){
-            console.log('velocity: '+ this.velocity);
-            console.log('points: '+ this.points);
-            console.log('stamina: '+ this.stamina);
+        if(this.points >= 1000){
+            if(int(this.points/1000) > this.lastHundred){
+                soundEffectFiles['hundred_points'].play();
+                this.lastHundred = int(this.points/1000);
+            }
+        }else{
+            if(int(this.points/100) > this.lastHundred){
+                soundEffectFiles['hundred_points'].play();
+                this.lastHundred = int(this.points/100);
+            }
         }
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
@@ -79,5 +90,6 @@ class Player extends Animation{
         return 0;
     }
     collision(){
+        soundEffectFiles['death'].play();
     }
 }

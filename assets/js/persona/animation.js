@@ -20,7 +20,13 @@ class Animation{
             this.sprite[this.actualAction]['spriteW'],
             this.sprite[this.actualAction]['spriteH']
             );
+
         this.animate();
+
+        if(isDebug){
+            this._collisionBox();
+            this._imageBox();
+        }
     }
     animate(){
         if(frameCount % 4 == 0){
@@ -33,22 +39,20 @@ class Animation{
         this.spriteName = spriteName;
         this.frameCount = 0;
     }
+
+    //To debug
     _collisionBox(){
-        if(isDebug){
-            noFill();
-            stroke(color('#0A8901'));
-            rectMode(CENTER);
-            rect(this.x, this.y, this.sprite[this.actualAction]['w']*this.precision[0], this.sprite[this.actualAction]['h']*this.precision[1]);
-            noStroke();
-        }
+        noFill();
+        stroke(color('#0A8901'));
+        rectMode(CENTER);
+        rect(this.x, this.y, this.sprite[this.actualAction]['w']*this.precision[0], this.sprite[this.actualAction]['h']*this.precision[1]);
+        noStroke();
     }
     _imageBox(){
-        if(isDebug){
-            noFill();
-            stroke(color('#000089'));
-            rectMode(CENTER);
-            rect(this.x, this.y, this.sprite[this.actualAction]['w'], this.sprite[this.actualAction]['h']);
-            noStroke();
-        }
+        noFill();
+        stroke(color('#000089'));
+        rectMode(CENTER);
+        rect(this.x, this.y, this.sprite[this.actualAction]['w'], this.sprite[this.actualAction]['h']);
+        noStroke();
     }
 }

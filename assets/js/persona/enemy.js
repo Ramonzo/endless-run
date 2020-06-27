@@ -5,9 +5,6 @@ class Enemy extends Animation{
     }
     draw(){
         this.render();
-
-        this._collisionBox();
-        this._imageBox();
     }
     move(direction){
         this.x = this.x - (this.velocity + player.velocity + direction);
