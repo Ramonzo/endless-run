@@ -87,7 +87,7 @@ let scenarySpriteNames = ['sky', 'forest', 'bushes_1'];
 let scenarySpriteFiles = []
 
 let soundEffectPath = 'effects/';
-let soundEffectNames = [];
+let soundEffectNames = ['cancel','confirm','jump','death','hundred_points','bad_powerup','good_powerup'];
 let soundEffectFiles = [];
 let soundTrackPath = 'tracks/';
 let soundTrackNames = [
