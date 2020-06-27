@@ -46,8 +46,14 @@ class Player extends Animation{
         }
     }
     move(){
-        this.velocity = this.velocity < 100 ? parseInt(this.points/3000)+this.velocityMove : 100;
-        this.points += parseInt((this.velocity * ((millis()-this.startTime) / 60000))/2);
+        this.velocity = this.velocity < 100 ? parseInt(this.points/(1000+(this.velocity*10)))+this.velocityMove : 100;
+        let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
+        this.points = int(newPoint*100);
+        if(isDebug){
+            console.log('velocity: '+ this.velocity);
+            console.log('points: '+ this.points);
+            console.log('stamina: '+ this.stamina);
+        }
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
                 if(this.stamina > 0){
