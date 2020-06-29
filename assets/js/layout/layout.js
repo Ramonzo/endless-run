@@ -1,3 +1,34 @@
+class ModalScreen{
+    constructor(){}
+}
+class ContentScreen{
+    constructor(){}
+}
+class FloatButtons{
+    constructor(){}
+}
+class MenuButtons{
+    constructor(text, action, color){
+    }
+    getNode(){
+    }
+}
+class Menu{
+    constructor(buttons, title = 'Menu'){
+    }
+    createMainMenu(){
+    }
+    showMainMenu(){
+    }
+    hideMainMenu(){
+    }
+    createPauseMenu(){
+    }
+    showPauseMenu(){
+    }
+    hidePauseMenu(){
+    }
+}
 class LoadBar{
     constructor(){
         this.content;
