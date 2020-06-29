@@ -75,13 +75,11 @@ class Game{
             state = stateGroup[1];
         }
     }
-    drawLoad(){
-        
-    }
     drawMenu(){
         if(!soundTrackFiles[0].isPlaying()){
             soundTrackFiles[0].loop();
         }
+        
     }
     drawGameScreen(){
     }

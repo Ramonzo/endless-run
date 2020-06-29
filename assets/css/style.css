@@ -73,6 +73,16 @@ span.head_1{
 .load_logo{
   margin: 10%;
 }
+.load_bar{
+  position: absolute;
+  width: 100%;
+  height: inherit !important;
+}
+.load_text{
+  position: absolute;
+  color: white;
+  width: 100%;
+}
 .hashtag{
   position: absolute;
   bottom: 0;

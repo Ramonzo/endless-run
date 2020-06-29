@@ -32,18 +32,18 @@ class LoadBar{
         this.content = createDiv().addClass("load_content");
         this.content.child(createImg('assets/img/logo.png', "logo").addClass("load_logo"));
         this.contentChild = createDiv().addClass("skills");
+        this.text = createP('Loading 5%').addClass("load_text").id("#load_text");
         this.content.child(this.contentChild);
-        this.loadBar = createDiv().id("#load_bar");
-        this.text = createP('Loading 5%').id("#load_text");
-        this.loadBar.child(this.text);
+        this.loadBar = createDiv().addClass("load_bar").id("#load_bar");
         this.loadBar.child(createDiv().addClass("clear"));
         this.contentChild.child(this.loadBar);
+        this.contentChild.child(this.text);
         this.content.hide();
     }
     showScreen(){
         this.content.show();
     }
-    hideScreen(){this.content.hide();
-
+    hideScreen(){
+        this.content.hide();
     }
 }
