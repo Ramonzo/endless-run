@@ -29,7 +29,9 @@ class Player extends Animation{
     }
     jump(){
         if(this.jumpCount < this.jumpMax){
-            soundEffectFiles['jump'].play();
+
+            sounds.playerJump();
+
             this.jumpCount++;
             this.velocityJump = -this.velocityMax;
             this.actualAction = 'jump';
@@ -56,12 +58,16 @@ class Player extends Animation{
         this.points = int(newPoint*100);
         if(this.points >= 1000){
             if(int(this.points/1000) > this.lastHundred){
-                soundEffectFiles['hundred_points'].play();
+
+                sounds.playerHundredPoints();
+
                 this.lastHundred = int(this.points/1000);
             }
         }else{
             if(int(this.points/100) > this.lastHundred){
-                soundEffectFiles['hundred_points'].play();
+
+                sounds.playerHundredPoints();
+
                 this.lastHundred = int(this.points/100);
             }
         }
@@ -90,6 +96,6 @@ class Player extends Animation{
         return 0;
     }
     collision(){
-        soundEffectFiles['death'].play();
+        sounds.personaDeath();
     }
 }

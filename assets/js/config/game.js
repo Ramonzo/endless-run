@@ -60,9 +60,9 @@ class Game{
         this.loadBar.showScreen();
         this.loadBar.update((this.loadedAssets/this.totalAssets)*100);
         if(this.loadedAssets >= this.totalAssets){
-            if(!soundTrackFiles[0].isPlaying()){
-                soundTrackFiles[0].loop();
-            }
+            sounds = new Sounds(soundEffectFiles, soundTrackFiles);
+            
+            sounds.menuSoundPlay();
 
             player = new Player(playerSpriteNames[0], 100, height);
 
@@ -81,21 +81,17 @@ class Game{
     drawMenu(){
         this.shareButton.show();
         this.soundButton.show();
-        if(!soundTrackFiles[0].isPlaying()){
-            soundTrackFiles[0].loop();
-        }
 
+        sounds.menuSoundPlay();
+        sounds.gameSoundStop();
     }
     drawGameScreen(){
         this.shareButton.hide();
     }
     play(){
-        if(soundTrackFiles[0].isPlaying()){
-            soundTrackFiles[0].stop();
-        }
-        if(!soundTrackFiles[1].isPlaying()){
-            soundTrackFiles[1].loop();
-        }
+        sounds.menuSoundStop();
+        sounds.gameSoundPlay();
+
         state = stateGroup[2];
     }
     draw(){

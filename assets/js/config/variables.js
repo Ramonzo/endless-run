@@ -109,3 +109,5 @@ let soundTrackNames = [
                         'gameover_sound_track'
                     ];
 let soundTrackFiles = [];
+
+let sounds;
