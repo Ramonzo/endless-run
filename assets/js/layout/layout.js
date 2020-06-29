@@ -41,7 +41,20 @@ class MenuButtons{
     getNode(){
     }
 }
-class Menu{
+class PauseMenu{
+    constructor(title = 'Menu'){
+        this.logo = 'assets/images/logo.png';
+        this.title = title;
+        this.content;
+    }
+    createPauseMenu(buttonsArray){
+    }
+    showPauseMenu(){
+    }
+    hidePauseMenu(){
+    }
+}
+class MainMenu{
     constructor(title = 'Menu'){
         this.logo = 'assets/images/logo.png';
         this.title = title;
@@ -74,12 +87,6 @@ class Menu{
     }
     hideMainMenu(){
         this.content.hide();
-    }
-    createPauseMenu(){
-    }
-    showPauseMenu(){
-    }
-    hidePauseMenu(){
     }
 }
 class LoadBar{

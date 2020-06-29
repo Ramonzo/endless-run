@@ -102,13 +102,13 @@ span.head_1{
   width: 2em;
   height: 2em;
   color: #FFF;
-  background-color: #D13471;
+  background-color: #225699;
   font-size: 1.5em;
   padding: .5em;
   margin: .5em;
   border: none;
-  border-bottom: 3px solid #BD1154;
-  border-right: 3px solid #BD1154;
+  border-bottom: 3px solid #114a94;
+  border-right: 3px solid #114a94;
   border-radius: 5px;
   right: 0;
   outline:0;
@@ -119,6 +119,9 @@ span.head_1{
   width: 50%;
   left: 25%;
   top: 3%;
+}
+.but_5{
+  margin: 5px;
 }
 /*-- Menu 1 --*/
 .menu_1{
@@ -2864,7 +2867,9 @@ i.point2 {
 /*-- bottom_grid --*/
 .volume{
 	background:#fff;
-	margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
+  box-shadow: 5px 8px 8px #A8A8A8;
+
 }
 .volume_top{
   background:#df4782;
@@ -2921,14 +2926,15 @@ i.sound{
   outline: none;
   padding:25px 30px;
   border: none;
-  background: #df4782;
+  background: #225699;
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
   width: 100%;
-  border-bottom: 5px solid #D13471;
+  border-bottom: 5px solid #114a94;
+  border-right: 5px solid #114a94;
 }
 .but_5 button:hover{
-	background:#D13471;
+	background:#114a94;
 }
 .volume_1{
   background:#c1c901;
@@ -3162,8 +3168,8 @@ p.m_6 a:hover{
 	text-transform:capitalize;
 }
 .price{
-  background:#ae8e75;
-  padding:1.5em 0;
+  background: #d87b2f;
+  padding: .1em 0;
   text-align: center;
   border-top-left-radius: 4px;
   -webkit-border-top-left-radius: 4px;

@@ -7,8 +7,12 @@ class Game{
         this.loadBar = new LoadBar();
         this.loadBar.createScreen();
 
-        this.mainMenu = new Menu();
-        this.mainMenu.createMainMenu([['Play', this.play]]);
+        this.mainMenu = new MainMenu();
+        this.mainMenu.createMainMenu([
+                                        ['Jogar', this.play],
+                                        ['Instruções', this.play],
+                                        ['Sobre', this.play]
+                                    ]);
         
         this.totalAssets = enemySpriteNames.length + 
                             playerSpriteNames.length + 
