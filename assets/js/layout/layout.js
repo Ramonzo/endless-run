@@ -30,7 +30,9 @@ class Menu{
     }
 }
 class LoadBar{
-    constructor(){
+    constructor(loadText = 'Carregando'){
+        this.logo = 'assets/images/logo.png';
+        this.loadText = loadText;
         this.content;
         this.contentChild;
         this.loadBar;
@@ -40,7 +42,7 @@ class LoadBar{
         this.contentChild = createDiv().addClass("skills");
         this.content.child(this.contentChild);
         this.loadBar = createDiv().id("#load_bar");
-        this.text = createP('Loading 5%').id("#load_text");
+        this.text = createP(this.loadText+' 5%').id("#load_text");
         this.loadBar.child(this.text);
         this.loadBar.child(createDiv().addClass("clear"));
         this.contentChild.child(this.loadBar);
@@ -53,7 +55,7 @@ class LoadBar{
         this.contentChild.show();
     }
     update(value){
-        this.text.html('Loading '+int(value)+'%');
+        this.text.html(this.loadText+' '+int(value)+'%');
         this.loadBar.style('width', int(value)+'%');
     }
     getNode(){
@@ -61,9 +63,9 @@ class LoadBar{
     }
     createScreen(){
         this.content = createDiv().addClass("load_content");
-        this.content.child(createImg('assets/img/logo.png', "logo").addClass("load_logo"));
+        this.content.child(createImg(this.logo, "logo").addClass("load_logo"));
         this.contentChild = createDiv().addClass("skills");
-        this.text = createP('Loading 5%').addClass("load_text").id("#load_text");
+        this.text = createP(this.loadText+' 5%').addClass("load_text").id("#load_text");
         this.content.child(this.contentChild);
         this.loadBar = createDiv().addClass("load_bar").id("#load_bar");
         this.loadBar.child(createDiv().addClass("clear"));

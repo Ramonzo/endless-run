@@ -89,6 +89,13 @@ span.head_1{
   right: 0;
   margin: 3%;
 }
+.share_button{
+  position: absolute;
+  width: 40%;
+  margin: 0.5em;
+  bottom: 0;
+  float: left;
+}
 
 /*-- Menu 1 --*/
 .menu_1{

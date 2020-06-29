@@ -1,5 +1,7 @@
 class Game{
     constructor(){
+        this.shareButton = select('#share_button');
+        this.shareButton.hide();
         this.loadBar = new LoadBar();
         this.loadBar.createScreen();
         this.totalAssets = enemySpriteNames.length + 
@@ -76,12 +78,14 @@ class Game{
         }
     }
     drawMenu(){
+        this.shareButton.show();
         if(!soundTrackFiles[0].isPlaying()){
             soundTrackFiles[0].loop();
         }
-        
+
     }
     drawGameScreen(){
+        this.shareButton.hide();
     }
     play(){
         if(soundTrackFiles[0].isPlaying()){
