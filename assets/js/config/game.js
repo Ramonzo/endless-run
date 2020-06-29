@@ -1,10 +1,15 @@
 class Game{
     constructor(){
-        this.soundButton = new FloatButton('', null, 'menu_2_right volume_button', null);
+        this.soundButton = new VolumeButton();
         this.shareButton = select('#share_button');
         this.shareButton.hide();
+
         this.loadBar = new LoadBar();
         this.loadBar.createScreen();
+
+        this.mainMenu = new Menu();
+        this.mainMenu.createMainMenu([['Play', this.play]]);
+        
         this.totalAssets = enemySpriteNames.length + 
                             playerSpriteNames.length + 
                             scenarySpriteNames.length + 
@@ -61,7 +66,7 @@ class Game{
         this.loadBar.update((this.loadedAssets/this.totalAssets)*100);
         if(this.loadedAssets >= this.totalAssets){
             sounds = new Sounds(soundEffectFiles, soundTrackFiles);
-            
+
             sounds.menuSoundPlay();
 
             player = new Player(playerSpriteNames[0], 100, height);
@@ -82,15 +87,17 @@ class Game{
         this.shareButton.show();
         this.soundButton.show();
 
+        this.mainMenu.showMainMenu();
+
         sounds.menuSoundPlay();
         sounds.gameSoundStop();
-    }
-    drawGameScreen(){
-        this.shareButton.hide();
     }
     play(){
         sounds.menuSoundStop();
         sounds.gameSoundPlay();
+
+        game.shareButton.hide();
+        game.mainMenu.hideMainMenu();
 
         state = stateGroup[2];
     }

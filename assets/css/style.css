@@ -35,6 +35,7 @@ html, body{
   padding: 0;
   margin: 0;
 }
+button:focus {outline:0;}
 .wrap{
 	width:98%;
 	margin:0 auto;
@@ -87,16 +88,38 @@ span.head_1{
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0.5em;
+  margin: .5em;
 }
 .share_button{
   position: absolute;
   width: 40%;
-  margin: 0.5em;
+  margin: .5em;
   bottom: 0;
   float: left;
 }
-
+.float_button{
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  color: #FFF;
+  background-color: #D13471;
+  font-size: 1.5em;
+  padding: .5em;
+  margin: .5em;
+  border: none;
+  border-bottom: 3px solid #BD1154;
+  border-right: 3px solid #BD1154;
+  border-radius: 5px;
+  right: 0;
+  outline:0;
+}
+.menu_content{
+  position: absolute;
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  top: 3%;
+}
 /*-- Menu 1 --*/
 .menu_1{
 	background:#df4782;
@@ -2874,7 +2897,7 @@ i.sound{
 }
 .volume_desc{
   background:#fff;
-  padding: 4em 1em 3em;
+  padding: 1em 1em 1em;
 }
 .volume_desc h3{
   text-transform: uppercase;
@@ -2890,7 +2913,7 @@ i.sound{
   line-height:1.8em;
   font-weight:200;
 }
-.but_5 input[type="submit"] {
+.but_5 button {
   font-size: 17px;
   font-weight: 500;
   color: #fff;
@@ -2904,7 +2927,7 @@ i.sound{
   width: 100%;
   border-bottom: 5px solid #D13471;
 }
-.but_5 input[type="submit"]:hover{
+.but_5 button:hover{
 	background:#D13471;
 }
 .volume_1{
@@ -4305,11 +4328,11 @@ ul.menu_7 li a span {
 .volume_3 {
     padding: 1em;
 }
-.but_5 input[type="submit"] {
+.but_5 button {
     padding: 15px 30px;
 }    
 .volume_desc {
-    padding: 4em 1em 1em;
+    padding: 1em 1em 1em;
 }
 .volume_desc p, .volume_1 p {
     font-size: 0.85em;

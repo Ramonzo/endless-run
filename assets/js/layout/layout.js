@@ -4,9 +4,11 @@ class ModalScreen{
 class ContentScreen{
     constructor(){}
 }
-class FloatButton{
-    constructor(text, action, cssClass){
-        this.button = createSpan().addClass(cssClass);
+class VolumeButton{
+    constructor(){
+        this.button = createButton('<i class="fa fa-volume-up" id="volume_icon"></i>').addClass('float_button');
+        this.active = true;
+        this.button.mousePressed(this.onClicked);
         this.button.hide();
     }
     show(){
@@ -14,6 +16,20 @@ class FloatButton{
     }
     hide(){
         this.button.hide();
+    }
+    onClicked(){
+        if(this.active){
+            this.active = false;
+            sounds.switchSound(this.active);
+            select('#volume_icon').removeClass('fa-volume-up');
+            select('#volume_icon').addClass('fa-volume-off');
+
+        }else{
+            this.active = true;
+            sounds.switchSound(this.active);
+            select('#volume_icon').removeClass('fa-volume-off');
+            select('#volume_icon').addClass('fa-volume-up');
+        }
     }
     getNode(){
         return this.button;
@@ -26,14 +42,38 @@ class MenuButtons{
     }
 }
 class Menu{
-    constructor(buttons, title = 'Menu'){
+    constructor(title = 'Menu'){
         this.logo = 'assets/images/logo.png';
+        this.title = title;
+        this.content;
     }
-    createMainMenu(){
+    createMainMenu(buttonsArray){
+        let buttons = buttonsArray;
+        this.content = createDiv().addClass('menu_content');
+        this.content.child(createImg(this.logo, "logo").addClass("menu_logo"));
+
+        //Menu Box
+        this.box_content = createDiv().addClass('volume');
+        this.title_content = createDiv().addClass('price');
+        this.title_content.child(createP(this.title).id('#menu_title'));
+        this.box_content.child(this.title_content);
+        this.button_content = createDiv().addClass('volume_desc');
+        buttons.forEach((element) => {
+            let inp = createButton(element[0]);
+            inp.mousePressed(element[1]);
+            let bt = createDiv().addClass('but_5');
+            bt.child(inp);
+            this.button_content.child(bt);
+        });
+        this.box_content.child(this.button_content);
+        this.content.child(this.box_content);
+        this.content.hide();
     }
     showMainMenu(){
+        this.content.show();
     }
     hideMainMenu(){
+        this.content.hide();
     }
     createPauseMenu(){
     }

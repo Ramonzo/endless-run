@@ -26,7 +26,7 @@ function draw() {
 function keyPressed() {
     switch(key){
         case 'w':
-            if(state == stateGroup[1]){
+            if(state == stateGroup[2]){
                 player.jump();
                 //jump sound play
             }

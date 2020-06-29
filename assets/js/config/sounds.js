@@ -4,8 +4,8 @@ class Sounds{
         this.soundFiles = soundFiles;
         this.effectFiles = effectFiles;
     }
-    switchSound(){
-        this.isPlaying = !this.isPlaying;
+    switchSound(value = !this.isPlaying){
+        this.isPlaying = value;
         if(this.isPlaying){
             this.menuSoundPlay();
             this.gameSoundPlay();
