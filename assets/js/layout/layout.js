@@ -4,8 +4,20 @@ class ModalScreen{
 class ContentScreen{
     constructor(){}
 }
-class FloatButtons{
-    constructor(){}
+class FloatButton{
+    constructor(text, action, cssClass){
+        this.button = createSpan().addClass(cssClass);
+        this.button.hide();
+    }
+    show(){
+        this.button.show();
+    }
+    hide(){
+        this.button.hide();
+    }
+    getNode(){
+        return this.button;
+    }
 }
 class MenuButtons{
     constructor(text, action, color){
@@ -15,6 +27,7 @@ class MenuButtons{
 }
 class Menu{
     constructor(buttons, title = 'Menu'){
+        this.logo = 'assets/images/logo.png';
     }
     createMainMenu(){
     }

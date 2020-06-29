@@ -1,5 +1,6 @@
 class Game{
     constructor(){
+        this.soundButton = new FloatButton('', null, 'menu_2_right volume_button', null);
         this.shareButton = select('#share_button');
         this.shareButton.hide();
         this.loadBar = new LoadBar();
@@ -79,6 +80,7 @@ class Game{
     }
     drawMenu(){
         this.shareButton.show();
+        this.soundButton.show();
         if(!soundTrackFiles[0].isPlaying()){
             soundTrackFiles[0].loop();
         }

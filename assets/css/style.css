@@ -87,7 +87,7 @@ span.head_1{
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 3%;
+  margin: 0.5em;
 }
 .share_button{
   position: absolute;
@@ -126,7 +126,7 @@ span.head_1{
 	float: right;
   width: 80px;
   height: 50px;
-  background: url(../images/menu_1_right.png)no-repeat 17px 5px #D13471;
+  background: url(../images/sound.png)no-repeat 17px 5px #D13471;
   cursor: pointer;
   display: block;
   position: relative;
@@ -217,7 +217,7 @@ span.menu_1_right:hover ul.menu_1_right_nav {
 	float:right;
 	width:80px;
 	height:50px;
-	background:url(../images/menu_1_right.png)no-repeat 17px 5px #B0B801;
+	background:url(../images/sound.png)no-repeat 17px 5px #B0B801;
 	cursor: pointer;
 	display:block;
 	position:relative;
@@ -3729,7 +3729,7 @@ ul.accout-login2 input[type="text"], ul.accout-login2 input[type="password"] {
 .menu_1_right {
   width: 50px;
   height: 35px;
-  background: url(../images/menu_1_right.png)no-repeat 2px -3px #D13471;
+  background: url(../images/sound.png)no-repeat 2px -3px #D13471;
 }
 .menu_1_left_nav li a, .menu_1_right_nav li a, .menu_2_right_nav li a, .menu_3_left_nav li a, .menu_3_right_nav li a, .menu_4_left_nav li a, .menu_4_right_nav li a{
   font-size: 12px;
@@ -3743,7 +3743,7 @@ ul.accout-login2 input[type="text"], ul.accout-login2 input[type="password"] {
 .menu_2_right {
   width: 50px;
   height: 35px;
-  background: url(../images/menu_1_right.png)no-repeat 2px -3px #B0B801;
+  background: url(../images/sound.png)no-repeat 2px -3px #B0B801;
   margin: 3px 0 0 0;
 }
 .menu_2 {
