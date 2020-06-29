@@ -10,6 +10,7 @@ let enemies = [];
 let scenaries;
 
 let stateGroup = [
+                    'loading',
                     'menu', 
                     'play', 
                     'pause', 
@@ -83,11 +84,23 @@ let enemySpriteNames = [
 let enemySpriteFiles = [];
 
 let scenarySpritePrefix = 'nature_';
-let scenarySpriteNames = ['sky', 'forest', 'bushes_1'];
+let scenarySpriteNames = [
+                            'sky', 
+                            'forest', 
+                            'bushes_1'
+                        ];
 let scenarySpriteFiles = []
 
 let soundEffectPath = 'effects/';
-let soundEffectNames = ['cancel','confirm','jump','death','hundred_points','bad_powerup','good_powerup'];
+let soundEffectNames = [
+                            'cancel',
+                            'confirm',
+                            'jump',
+                            'death',
+                            'hundred_points',
+                            'bad_powerup',
+                            'good_powerup'
+                        ];
 let soundEffectFiles = [];
 let soundTrackPath = 'tracks/';
 let soundTrackNames = [

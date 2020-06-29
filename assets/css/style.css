@@ -31,7 +31,9 @@ img{max-width:100%;}
 html, body{
 	font-family: 'Roboto', sans-serif;
 	font-size: 100%;
-	background-color:#f0f2f5;
+  background-color:#f0f2f5;
+  padding: 0;
+  margin: 0;
 }
 .wrap{
 	width:98%;
@@ -56,6 +58,28 @@ span.head_1{
   float: left;
   width: 31.3%;
 }
+
+
+/* GAME LAYOUT */
+.canvas_content{
+  position: absolute;
+}
+.load_content{
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  text-align: center;
+}
+.load_logo{
+  margin: 10%;
+}
+.hashtag{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 3%;
+}
+
 /*-- Menu 1 --*/
 .menu_1{
 	background:#df4782;
@@ -2245,7 +2269,7 @@ ul.white-tag-list1 li.middle2{
   width: 100%;
   margin: 10px 0;
   background-color:#e1e4e9;
-  height: 12px;
+  height: 1.5em;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2268,7 +2292,7 @@ ul.white-tag-list1 li.middle2{
   border-radius: 5px;
 }
 .skills > div p{
-  font-size: 11px;
+  font-size: 1em;
   color: #fff;
   float: right;
 }

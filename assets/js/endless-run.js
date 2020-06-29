@@ -3,18 +3,21 @@ function preload(){
     frameRate(30);
 
     game = new Game();
-    game.load();
 }
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
-    select('#canvas_container').child(canvas);
-    game.setup();
+    select('#canvas_content').child(canvas);
+    game.load();
 }
 
 function draw() {
     background(255);
-    if(state == stateGroup[1]){
+    if(state == stateGroup[0]){
+        game.setup();
+    }else if(state == stateGroup[1]){
+        game.drawMenu();
+    }else if(state == stateGroup[2]){
         game.move();
         game.draw();
     }
@@ -22,9 +25,6 @@ function draw() {
 
 function keyPressed() {
     switch(key){
-        case 'p':
-            game.play();
-        break;
         case 'w':
             if(state == stateGroup[1]){
                 player.jump();
