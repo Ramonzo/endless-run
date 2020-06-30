@@ -54,12 +54,6 @@ class VolumeButton{
         return this.button;
     }
 }
-class MenuButtons{
-    constructor(text, action, color){
-    }
-    getNode(){
-    }
-}
 class PauseMenu{
     constructor(title = 'Menu'){
         this.logo = 'assets/images/logo.png';
@@ -132,7 +126,6 @@ class MainMenu{
 }
 class LoadBar{
     constructor(loadText = 'Carregando'){
-        this.logo = 'assets/images/logo.png';
         this.loadText = loadText;
         this.content;
         this.contentChild;
@@ -141,7 +134,6 @@ class LoadBar{
     }
     createBar(){
         this.contentChild = createDiv().addClass("skills");
-        this.content.child(this.contentChild);
         this.loadBar = createDiv().id("#load_bar");
         this.text = createP(this.loadText+' 5%').id("#load_text");
         this.loadBar.child(this.text);
@@ -160,18 +152,22 @@ class LoadBar{
         this.loadBar.style('width', int(value)+'%');
     }
     getNode(){
-        return this.content;
+        return this.contentChild;
+    }
+}
+class LoadScreen{
+    constructor(){
+        this.loadBar = new LoadBar();
+        this.logo = 'assets/images/logo.png';
+        this.loadBar.createBar();
+        this.loadBar.showBar();
     }
     createScreen(){
         this.content = createDiv().addClass("load_content");
         this.content.child(createImg(this.logo, "logo").addClass("load_logo"));
-        this.contentChild = createDiv().addClass("skills");
-        this.text = createP(this.loadText+' 5%').addClass("load_text").id("#load_text");
-        this.content.child(this.contentChild);
-        this.loadBar = createDiv().addClass("load_bar").id("#load_bar");
-        this.loadBar.child(createDiv().addClass("clear"));
-        this.contentChild.child(this.loadBar);
-        this.contentChild.child(this.text);
+
+        this.content.child(this.loadBar.getNode());
+
         this.content.hide();
     }
     showScreen(){
@@ -179,5 +175,11 @@ class LoadBar{
     }
     hideScreen(){
         this.content.hide();
+    }
+    update(value){
+        this.loadBar.update(value);
+    }
+    getNode(){
+        return this.content;
     }
 }

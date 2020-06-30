@@ -6,8 +6,8 @@ class Game{
         this.shareButton = select('#share_button');
         this.shareButton.hide();
 
-        this.loadBar = new LoadBar();
-        this.loadBar.createScreen();
+        this.loadScreen = new LoadScreen();
+        this.loadScreen.createScreen();
 
         this.mainMenu = new MainMenu();
         this.mainMenu.createMenu([
@@ -74,14 +74,14 @@ class Game{
         });
     }
     setup(){
-        this.loadBar.showScreen();
-        this.loadBar.update((this.loadedAssets/this.totalAssets)*100);
+        this.loadScreen.showScreen();
+        this.loadScreen.update((this.loadedAssets/this.totalAssets)*100);
         if(this.loadedAssets >= this.totalAssets){
             sounds = new Sounds(soundEffectFiles, soundTrackFiles);
 
             sounds.menuSoundPlay();
 
-            this.loadBar.hideScreen();
+            this.loadScreen.hideScreen();
             state = stateGroup[1];
         }
     }
