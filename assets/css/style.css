@@ -113,12 +113,18 @@ span.head_1{
   right: 0;
   outline:0;
 }
-.menu_content{
+.pause_button{
+  top: 2.5em;
+}
+.menu_content, .pause_menu_content{
   position: absolute;
   text-align: center;
   width: 50%;
   left: 25%;
   top: 3%;
+}
+.pause_menu_content IMG{
+  max-width: 50%;
 }
 .but_5{
   margin: 5px;

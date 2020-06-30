@@ -3,53 +3,43 @@ class Sounds{
         this.isPlaying = true;
         this.soundFiles = soundFiles;
         this.effectFiles = effectFiles;
+        this.actualSoundTrack = null;
     }
     switchSound(value = !this.isPlaying){
         this.isPlaying = value;
-        if(this.isPlaying){
-            this.menuSoundPlay();
-            this.gameSoundPlay();
-            this.gameoverSoundPlay();
-        }else{
-            this.menuSoundStop();
-            this.gameSoundStop();
-            this.gameoverSoundStop();
+        if(this.actualSoundTrack != null && this.isPlaying && !this.actualSoundTrack.isPlaying()){
+            this.actualSoundTrack.loop();
+        }else if(this.actualSoundTrack != null && this.actualSoundTrack.isPlaying()){
+            this.stopTrack(0);
+            this.stopTrack(1);
+            this.stopTrack(2);
         }
     }
     menuSoundPlay(){
-        if(this.isPlaying){
-            if(!this.soundFiles[0].isPlaying()){
-                this.soundFiles[0].loop();
-            }
-        }
-    }
-    menuSoundStop(){
-        if(this.soundFiles[0].isPlaying()){
-            this.soundFiles[0].stop();
-        }
+        this.playTrack(0);
     }
     gameSoundPlay(){
-        if(this.isPlaying){
-            if(!this.soundFiles[1].isPlaying()){
-                this.soundFiles[1].loop();
-            }
-        }
-    }
-    gameSoundStop(){
-        if(this.soundFiles[1].isPlaying()){
-            this.soundFiles[1].stop();
-        }
+        this.playTrack(1);
     }
     gameoverSoundPlay(){
+        this.playTrack(2);
+    }
+    playTrack(id){
         if(this.isPlaying){
-            if(!this.soundFiles[2].isPlaying()){
-                this.soundFiles[2].loop();
+            if(this.actualSoundTrack != this.soundFiles[id]){
+                if(this.actualSoundTrack != null && this.actualSoundTrack.isPlaying()){
+                    this.actualSoundTrack.stop();
+                }
+                this.actualSoundTrack = this.soundFiles[id];
+                this.actualSoundTrack.loop();
             }
         }
     }
-    gameoverSoundStop(){
-        if(this.soundFiles[2].isPlaying()){
-            this.soundFiles[2].stop();
+    stopTrack(id){
+        if(this.actualSoundTrack == this.soundFiles[id]){
+            if(this.actualSoundTrack.isPlaying()){
+                this.actualSoundTrack.stop();
+            }
         }
     }
     playerJump(){

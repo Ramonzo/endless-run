@@ -1,6 +1,8 @@
 class Game{
     constructor(){
         this.soundButton = new VolumeButton();
+        this.pauseButton = new PauseButton();
+        this.pauseButton.onClicked(this.pause);
         this.shareButton = select('#share_button');
         this.shareButton.hide();
 
@@ -8,12 +10,18 @@ class Game{
         this.loadBar.createScreen();
 
         this.mainMenu = new MainMenu();
-        this.mainMenu.createMainMenu([
+        this.mainMenu.createMenu([
                                         ['Jogar', this.play],
                                         ['Instruções', this.play],
                                         ['Sobre', this.play]
                                     ]);
-        
+        this.pauseMenu = new PauseMenu('Pause');
+        this.pauseMenu.createMenu([
+                                            ['Voltar', this.resume],
+                                            ['Reiniciar', this.play],
+                                            ['Instruções', this.play],
+                                            ['Sair', this.quit]
+                                        ]);
         this.totalAssets = enemySpriteNames.length + 
                             playerSpriteNames.length + 
                             scenarySpriteNames.length + 
@@ -73,37 +81,59 @@ class Game{
 
             sounds.menuSoundPlay();
 
-            player = new Player(playerSpriteNames[0], 100, height);
-
-            scenaries = [
-                        new Scenary(scenarySpriteFiles[0], height/2, width, height, 3),
-                        new Scenary(scenarySpriteFiles[1], height*60/100, width, height/7*4, 5),
-                        new Scenary(scenarySpriteFiles[2], height*95/100, width, height/15*2, 4)
-                    ];
-
-            enemies[0] = new Enemy(playerSpriteNames[0], width, height);
-
             this.loadBar.hideScreen();
             state = stateGroup[1];
         }
     }
-    drawMenu(){
+    drawMainMenu(){
         this.shareButton.show();
         this.soundButton.show();
 
-        this.mainMenu.showMainMenu();
+        this.mainMenu.showMenu();
+        this.pauseMenu.hideMenu();
 
         sounds.menuSoundPlay();
-        sounds.gameSoundStop();
     }
-    play(){
-        sounds.menuSoundStop();
+    drawPauseMenu(){
+        this.shareButton.show();
+        this.soundButton.show();
+        game.pauseButton.hide();
+
+        this.pauseMenu.showMenu();
+
+        sounds.menuSoundPlay();
+    }
+    resume(){
+        game.shareButton.hide();
+        game.mainMenu.hideMenu();
+        game.pauseMenu.hideMenu();
+        game.soundButton.show();
+        game.pauseButton.show();
+
         sounds.gameSoundPlay();
 
+        state = stateGroup[2];
+    }
+    play(){
+        game._createGame();
+
         game.shareButton.hide();
-        game.mainMenu.hideMainMenu();
+        game.mainMenu.hideMenu();
+        game.pauseMenu.hideMenu();
+        game.soundButton.show();
+        game.pauseButton.show();
+
+        sounds.gameSoundPlay();
 
         state = stateGroup[2];
+    }
+    pause(){
+        state = stateGroup[3];
+        game.drawPauseMenu();
+    }
+    quit(){
+        state = stateGroup[1];
+        game.pauseMenu.hideMenu();
     }
     draw(){
         //Back draw
@@ -119,6 +149,7 @@ class Game{
         scenaries[2].draw();
     }
     move(){
+        player.pointCounter();
         let direction = player.move();
         scenaries.forEach((item) => {
             item.move(direction, player.velocity);
@@ -127,8 +158,15 @@ class Game{
             enemy.move(direction, player.velocity);
         });
     }
-    reset(){
-        player = new Player(0, 100, height - skinParameters[playerSpriteNames[0]]['h']);
-        enemies = [];
+    _createGame(){
+        player = new Player(playerSpriteNames[0], 100, height);
+
+        scenaries = [
+                    new Scenary(scenarySpriteFiles[0], height/2, width, height, 3),
+                    new Scenary(scenarySpriteFiles[1], height*60/100, width, height/7*4, 5),
+                    new Scenary(scenarySpriteFiles[2], height*95/100, width, height/15*2, 4)
+                ];
+
+        enemies[0] = new Enemy(playerSpriteNames[0], width, height);
     }
 }

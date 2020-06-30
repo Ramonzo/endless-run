@@ -5,6 +5,7 @@ class Player extends Animation{
         this.initialY = this.y;
         this.life = 3;
         this.points = 0;
+        this.bufferPoints = 0;
         this.velocity = 0;
         this.velocityMove = 3;
         this.jumpCount = 0;
@@ -20,6 +21,11 @@ class Player extends Animation{
     draw(){
         this.render();
         this.applyGravity();
+
+        if(state == stateGroup[3]){
+            this.startTime = millis();
+            this.bufferPoints = this.points;
+        }
 
         if(isDebug){
             console.log('velocity: '+ this.velocity);
@@ -53,24 +59,6 @@ class Player extends Animation{
         }
     }
     move(){
-        this.velocity = this.velocity < 100 ? parseInt(this.points/(1000+(this.velocity*10)))+this.velocityMove : 100;
-        let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
-        this.points = int(newPoint*100);
-        if(this.points >= 1000){
-            if(int(this.points/1000) > this.lastHundred){
-
-                sounds.playerHundredPoints();
-
-                this.lastHundred = int(this.points/1000);
-            }
-        }else{
-            if(int(this.points/100) > this.lastHundred){
-
-                sounds.playerHundredPoints();
-
-                this.lastHundred = int(this.points/100);
-            }
-        }
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
                 if(this.stamina > 0){
@@ -94,6 +82,26 @@ class Player extends Animation{
             }
         }
         return 0;
+    }
+    pointCounter(){
+        this.velocity = this.velocity < 100 ? parseInt(this.points/(1000+(this.velocity*10)))+this.velocityMove : 100;
+        let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
+        this.points = int(newPoint*100)+this.bufferPoints;
+        if(this.points >= 1000){
+            if(int(this.points/1000) > this.lastHundred){
+
+                sounds.playerHundredPoints();
+
+                this.lastHundred = int(this.points/1000);
+            }
+        }else{
+            if(int(this.points/100) > this.lastHundred){
+
+                sounds.playerHundredPoints();
+
+                this.lastHundred = int(this.points/100);
+            }
+        }
     }
     collision(){
         sounds.personaDeath();

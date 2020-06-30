@@ -4,10 +4,9 @@ class ModalScreen{
 class ContentScreen{
     constructor(){}
 }
-class VolumeButton{
+class PauseButton{
     constructor(){
-        this.button = createButton('<i class="fa fa-volume-up" id="volume_icon"></i>').addClass('float_button');
-        this.active = true;
+        this.button = createButton('<i class="fa fa-pause" id="volume_icon"></i>').addClass('float_button pause_button');
         this.button.mousePressed(this.onClicked);
         this.button.hide();
     }
@@ -17,7 +16,27 @@ class VolumeButton{
     hide(){
         this.button.hide();
     }
-    onClicked(){
+    onClicked(action){
+        this.button.mousePressed(action);
+    }
+    getNode(){
+        return this.button;
+    }
+}
+class VolumeButton{
+    constructor(){
+        this.active = true;
+        this.button = createButton('<i class="fa fa-volume-up" id="volume_icon"></i>').addClass('float_button');
+        this.button.mousePressed(this._onClicked);
+        this.button.hide();
+    }
+    show(){
+        this.button.show();
+    }
+    hide(){
+        this.button.hide();
+    }
+    _onClicked(){
         if(this.active){
             this.active = false;
             sounds.switchSound(this.active);
@@ -47,11 +66,33 @@ class PauseMenu{
         this.title = title;
         this.content;
     }
-    createPauseMenu(buttonsArray){
+    createMenu(buttonsArray){
+        let buttons = buttonsArray;
+        this.content = createDiv().addClass('pause_menu_content');
+        this.content.child(createImg(this.logo, "logo").addClass("pause_menu_logo"));
+
+        //Menu Box
+        this.box_content = createDiv().addClass('volume');
+        this.title_content = createDiv().addClass('price');
+        this.title_content.child(createP(this.title).id('#pause_menu_title'));
+        this.box_content.child(this.title_content);
+        this.button_content = createDiv().addClass('volume_desc');
+        buttons.forEach((element) => {
+            let inp = createButton(element[0]);
+            inp.mousePressed(element[1]);
+            let bt = createDiv().addClass('but_5');
+            bt.child(inp);
+            this.button_content.child(bt);
+        });
+        this.box_content.child(this.button_content);
+        this.content.child(this.box_content);
+        this.content.hide();
     }
-    showPauseMenu(){
+    showMenu(){
+        this.content.show();
     }
-    hidePauseMenu(){
+    hideMenu(){
+        this.content.hide();
     }
 }
 class MainMenu{
@@ -60,7 +101,7 @@ class MainMenu{
         this.title = title;
         this.content;
     }
-    createMainMenu(buttonsArray){
+    createMenu(buttonsArray){
         let buttons = buttonsArray;
         this.content = createDiv().addClass('menu_content');
         this.content.child(createImg(this.logo, "logo").addClass("menu_logo"));
@@ -82,10 +123,10 @@ class MainMenu{
         this.content.child(this.box_content);
         this.content.hide();
     }
-    showMainMenu(){
+    showMenu(){
         this.content.show();
     }
-    hideMainMenu(){
+    hideMenu(){
         this.content.hide();
     }
 }

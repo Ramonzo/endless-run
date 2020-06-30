@@ -13,13 +13,20 @@ function setup() {
 
 function draw() {
     background(255);
-    if(state == stateGroup[0]){
-        game.setup();
-    }else if(state == stateGroup[1]){
-        game.drawMenu();
-    }else if(state == stateGroup[2]){
-        game.move();
-        game.draw();
+    switch(state){
+        case stateGroup[0]:
+            game.setup();
+        break;
+        case stateGroup[1]:
+            game.drawMainMenu();
+        break;
+        case stateGroup[2]:
+            game.move();
+            game.draw();
+        break;
+        case stateGroup[3]:
+            game.draw();
+        break;
     }
 }
 
