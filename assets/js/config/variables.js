@@ -20,6 +20,13 @@ let state = stateGroup[0];
 //
 //To game assets
 //
+//Fonts
+//
+fontFormat = '.ttf';
+fontPath = 'assets/fonts/';
+fontNames = ['KronaOne-Regular'];
+fontFiles = [];
+//
 //
 //Sprite Files
 //

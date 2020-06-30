@@ -1,6 +1,24 @@
 //
 //Gaming Interface
 //
+class PointMark{
+    constructor(text, x, y){
+        this.x = x;
+        this.y = y;
+        this.text = text;
+        this.value = 0;
+    }
+    draw(){
+        let txt = this.text+': '+this.value;
+        textFont(fontFiles[0]);
+        fill(255);
+        textSize(20);
+        text(txt, this.x, this.y);
+    }
+    update(value){
+        this.value = value;
+    }
+}
 class HearthGroup{
     constructor(quantityTotal){
         this.quantityTotal = quantityTotal;

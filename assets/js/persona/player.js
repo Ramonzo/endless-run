@@ -7,6 +7,7 @@ class Player extends Animation{
         this.lifeMax = 3;
         this.life = this.lifeMax;
         this.points = 0;
+        this.coins = 0;
         this.bufferPoints = 0;
         this.velocity = 0;
         this.velocityMove = 3;
@@ -19,11 +20,8 @@ class Player extends Animation{
         this.stamina = 100;
         this.canRun = true;
         this.lastHundred = 0;
-        //External Object Calls
-        this.hearthGroup = new HearthGroup(this.lifeMax);
     }
     draw(){
-        this.hearthGroup.draw();
         this.render();
         this.applyGravity();
 
@@ -107,8 +105,19 @@ class Player extends Animation{
             }
         }
     }
+    getPoints(){
+        return this.points;
+    }
+    getCoins(){
+        return this.coins;
+    }
+    getLifeMax(){
+        return this.lifeMax;
+    }
+    getLifes(){
+        return this.life;
+    }
     collision(){
         sounds.personaDeath();
-        this.hearthGroup.update(this.life);
     }
 }

@@ -6,6 +6,10 @@ class Game{
         this.shareButton = select('#share_button');
         this.shareButton.hide();
 
+        this.hearthGroup;
+        this.playerPoints;
+        this.playerCoins;
+
         this.loadScreen = new LoadScreen();
         this.loadScreen.createScreen();
 
@@ -27,7 +31,8 @@ class Game{
                             scenarySpriteNames.length + 
                             iconsSpriteNames.length +
                             soundTrackNames.length + 
-                            soundEffectNames.length;
+                            soundEffectNames.length +
+                            fontNames.length;
         this.loadedAssets = 0;
         state = stateGroup[0];
     }
@@ -77,6 +82,14 @@ class Game{
         soundEffectNames.forEach((name) => {
             let file = soundPath+soundEffectPath+name;
             soundEffectFiles[name] = loadSound(file, () => {this.loadedAssets++;});
+            if(isDebug){
+                console.log(file);
+            }
+        });
+        //loading sound effects
+        fontNames.forEach((name) => {
+            let file = fontPath+name+fontFormat;
+            fontFiles.push(loadFont(file, () => {this.loadedAssets++;}));
             if(isDebug){
                 console.log(file);
             }
@@ -150,25 +163,35 @@ class Game{
         scenaries[1].draw();
         //Middle draw
         player.draw();
-
         enemies.forEach((enemy) => {
             enemy.draw();
         });
+        this.hearthGroup.draw();
+        this.playerPoints.draw();
+        this.playerCoins.draw();
         //Top draw
         scenaries[2].draw();
     }
     move(){
         player.pointCounter();
         let direction = player.move();
+
         scenaries.forEach((item) => {
             item.move(direction, player.velocity);
         });
         enemies.forEach((enemy) => {
             enemy.move(direction, player.velocity);
         });
+        
+        this.hearthGroup.update(player.getLifes());
+        this.playerPoints.update(player.getPoints());
+        this.playerCoins.update(player.getCoins());
     }
     _createGame(){
         player = new Player(playerSpriteNames[0], 100, height);
+        this.hearthGroup = new HearthGroup(player.getLifeMax());
+        this.playerPoints = new PointMark('Km', 30, 100);
+        this.playerCoins = new PointMark('Moedas', 30, 130);
 
         scenaries = [
                     new Scenary(scenarySpriteFiles[0], height/2, width, height, 3),
