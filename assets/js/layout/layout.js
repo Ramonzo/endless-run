@@ -1,8 +1,23 @@
-class ModalScreen{
-    constructor(){}
-}
-class ContentScreen{
-    constructor(){}
+//
+//Gaming Interface
+//
+class HearthGroup{
+    constructor(quantityTotal){
+        this.quantityTotal = quantityTotal;
+        this.actualHave = this.quantityTotal;
+    }
+    draw(){
+        let diference = this.quantityTotal - this.actualHave;
+        for(let i = 1; i <= this.actualHave; i++){
+            image(iconsSpiteFiles[7], 50*i, 50, 50, 50);
+        }
+        for(let i = 1; i <= diference; i++){
+            image(iconsSpiteFiles[6], 50*(i+this.actualHave), 50, 50, 50);
+        }
+    }
+    update(actualHave){
+        this.actualHave = actualHave;
+    }
 }
 class PauseButton{
     constructor(){
@@ -53,6 +68,15 @@ class VolumeButton{
     getNode(){
         return this.button;
     }
+}
+//
+//Screens
+//
+class ModalScreen{
+    constructor(){}
+}
+class ContentScreen{
+    constructor(){}
 }
 class PauseMenu{
     constructor(title = 'Menu'){

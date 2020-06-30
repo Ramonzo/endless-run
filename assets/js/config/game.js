@@ -22,9 +22,10 @@ class Game{
                                             ['Instruções', this.play],
                                             ['Sair', this.quit]
                                         ]);
-        this.totalAssets = enemySpriteNames.length + 
-                            playerSpriteNames.length + 
+        this.totalAssets =  playerSpriteNames.length + 
+                            enemySpriteNames.length + 
                             scenarySpriteNames.length + 
+                            iconsSpriteNames.length +
                             soundTrackNames.length + 
                             soundEffectNames.length;
         this.loadedAssets = 0;
@@ -52,6 +53,14 @@ class Game{
         scenarySpriteNames.forEach((name) => {
             let file = spriteScenaryPath+scenarySpritePrefix+name+spriteFormat;
             scenarySpriteFiles.push(loadImage(file, () => {this.loadedAssets++;}));
+            if(isDebug){
+                console.log(file);
+            }
+        });
+        //loading icons sprites
+        iconsSpriteNames.forEach((name) => {
+            let file = spriteIconPath+name+spriteFormat;
+            iconsSpiteFiles.push(loadImage(file, () => {this.loadedAssets++;}));
             if(isDebug){
                 console.log(file);
             }

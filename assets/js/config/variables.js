@@ -20,12 +20,14 @@ let state = stateGroup[0];
 //
 //To game assets
 //
+//
+//Sprite Files
+//
 let spriteFormat = '.png';
-let soundFormat = 'wav';
 let spritePersonaPath = 'assets/sprites/persona/';
 let spriteScenaryPath = 'assets/sprites/nature/';
-let soundPath = 'assets/sounds/';
-
+let spriteIconPath = 'assets/sprites/icons/';
+//Player
 let playerSpritePrefix = 'player_';
 let playerSpriteNames = [
                             'default'
@@ -62,7 +64,7 @@ let skinParameters = {
                                 }
                     }
 let playerSpriteFiles = [];
-
+//Enemies
 let enemySpritePrefix = 'enemy_';
 let enemySpriteNames = [
                         'bat_1',
@@ -82,7 +84,7 @@ let enemySpriteNames = [
                         'wolf_1'
                     ];
 let enemySpriteFiles = [];
-
+//Scenary
 let scenarySpritePrefix = 'nature_';
 let scenarySpriteNames = [
                             'sky', 
@@ -90,6 +92,27 @@ let scenarySpriteNames = [
                             'bushes_1'
                         ];
 let scenarySpriteFiles = []
+//Icons
+let iconsSpriteNames = [
+                            'coin',
+                            'fly',
+                            'full_stamina',
+                            'invencible_run',
+                            'less_speed',
+                            'more_speed',
+                            'one_hearth_less',
+                            'one_hearth_more',
+                            'random',
+                            'shild',
+                            'weight'
+                        ];
+let iconsSpiteFiles = [];
+//
+//Sound Files
+//
+
+let soundFormat = 'wav';
+let soundPath = 'assets/sounds/';
 
 let soundEffectPath = 'effects/';
 let soundEffectNames = [

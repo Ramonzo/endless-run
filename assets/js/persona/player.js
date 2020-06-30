@@ -1,9 +1,11 @@
 class Player extends Animation{
     constructor(sprite, x, y){
+        //Object Variables
         super(sprite, x, y, [.5, .8]);
         this.initialX = this.x;
         this.initialY = this.y;
-        this.life = 3;
+        this.lifeMax = 3;
+        this.life = this.lifeMax;
         this.points = 0;
         this.bufferPoints = 0;
         this.velocity = 0;
@@ -17,8 +19,11 @@ class Player extends Animation{
         this.stamina = 100;
         this.canRun = true;
         this.lastHundred = 0;
+        //External Object Calls
+        this.hearthGroup = new HearthGroup(this.lifeMax);
     }
     draw(){
+        this.hearthGroup.draw();
         this.render();
         this.applyGravity();
 
@@ -35,7 +40,6 @@ class Player extends Animation{
     }
     jump(){
         if(this.jumpCount < this.jumpMax){
-
             sounds.playerJump();
 
             this.jumpCount++;
@@ -105,5 +109,6 @@ class Player extends Animation{
     }
     collision(){
         sounds.personaDeath();
+        this.hearthGroup.update(this.life);
     }
 }
