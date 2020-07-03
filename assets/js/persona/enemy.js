@@ -1,6 +1,6 @@
 class Enemy extends Animation{
     constructor(sprite, x, y){
-        super(sprite, x, y, [.5, .8]);
+        super(sprite, x, y, [.3, .6]);
         this.velocity = 3;
     }
     draw(){

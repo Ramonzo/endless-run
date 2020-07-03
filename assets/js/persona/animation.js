@@ -39,7 +39,9 @@ class Animation{
         this.spriteName = spriteName;
         this.frameCount = 0;
     }
-
+    getCollisionBox(){
+        return [this.sprite[this.actualAction]['w']*this.precision[0], this.sprite[this.actualAction]['h']*this.precision[1]];
+    }
     //To debug
     _collisionBox(){
         noFill();
