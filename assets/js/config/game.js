@@ -1,8 +1,10 @@
 class Game{
     constructor(){
         this.soundButton = new VolumeButton();
+        
         this.pauseButton = new PauseButton();
         this.pauseButton.onClicked(this.pause);
+        
         this.shareButton = select('#share_button');
         this.shareButton.hide();
 

@@ -58,7 +58,7 @@ class PauseButton{
 }
 class VolumeButton{
     constructor(){
-        this.active = true;
+        this.active = false;
         this.button = createButton('<i class="fa fa-volume-up" id="volume_icon"></i>').addClass('float_button');
         this.button.mousePressed(this._onClicked);
         this.button.hide();
@@ -71,14 +71,19 @@ class VolumeButton{
     }
     _onClicked(){
         if(this.active){
-            this.active = false;
-            sounds.switchSound(this.active);
+            mute(this.active);
+        }else{
+            speaking(this.active);
+        }
+        this.active = !this.active;
+        sounds.switchSound(this.active);
+
+        //Local functions
+        function mute(){
             select('#volume_icon').removeClass('fa-volume-up');
             select('#volume_icon').addClass('fa-volume-off');
-
-        }else{
-            this.active = true;
-            sounds.switchSound(this.active);
+        }
+        function speaking(){
             select('#volume_icon').removeClass('fa-volume-off');
             select('#volume_icon').addClass('fa-volume-up');
         }

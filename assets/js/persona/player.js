@@ -10,11 +10,11 @@ class Player extends Animation{
         this.coins = 0;
         this.bufferPoints = 0;
         this.velocity = 0;
-        this.velocityMove = 1;
+        this.velocityMove = 3;
         this.jumpCount = 0;
         this.jumpMax = 2;
         this.velocityJump = 0;
-        this.velocityMax = 30;
+        this.velocityMax = 25;
         this.gravity = 3;
         this.startTime = millis();
         this.stamina = 100;

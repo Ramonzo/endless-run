@@ -3,16 +3,18 @@ class Sounds{
         this.isPlaying = true;
         this.soundFiles = soundFiles;
         this.effectFiles = effectFiles;
-        this.actualSoundTrack = null;
+        this.actualSoundTrack = this.soundFiles[0];
     }
     switchSound(value = !this.isPlaying){
         this.isPlaying = value;
-        if(this.actualSoundTrack != null && this.isPlaying && !this.actualSoundTrack.isPlaying()){
-            this.actualSoundTrack.loop();
-        }else if(this.actualSoundTrack != null && this.actualSoundTrack.isPlaying()){
-            this.stopTrack(0);
-            this.stopTrack(1);
-            this.stopTrack(2);
+        if(this.actualSoundTrack != null){
+            if(this.isPlaying && !this.actualSoundTrack.isPlaying()){
+                this.actualSoundTrack.loop();
+            }else if(this.actualSoundTrack.isPlaying()){
+                this.stopTrack(0);
+                this.stopTrack(1);
+                this.stopTrack(2);
+            }
         }
     }
     menuSoundPlay(){
@@ -25,12 +27,12 @@ class Sounds{
         this.playTrack(2);
     }
     playTrack(id){
-        if(this.isPlaying){
-            if(this.actualSoundTrack != this.soundFiles[id]){
-                if(this.actualSoundTrack != null && this.actualSoundTrack.isPlaying()){
-                    this.actualSoundTrack.stop();
-                }
-                this.actualSoundTrack = this.soundFiles[id];
+        if(this.actualSoundTrack != this.soundFiles[id]){
+            if(this.actualSoundTrack != null && this.actualSoundTrack.isPlaying()){
+                this.actualSoundTrack.stop();
+            }
+            this.actualSoundTrack = this.soundFiles[id];
+            if(this.isPlaying){
                 this.actualSoundTrack.loop();
             }
         }
