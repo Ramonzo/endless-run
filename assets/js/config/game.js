@@ -4,7 +4,7 @@ class Game{
         
         this.pauseButton = new PauseButton();
         this.pauseButton.onClicked(this.pause);
-        
+
         this.shareButton = select('#share_button');
         this.shareButton.hide();
 
@@ -43,31 +43,31 @@ class Game{
         //loading enemy sprites
         enemySpriteNames.forEach((name) => {
             let file = spritePersonaPath+enemySpritePrefix+name+spriteFormat;
-            enemySpriteFiles[name] = loadImage(file, () => {this.loadedAssets++;});
+            enemySpriteFiles[enemySpritePrefix+name] = loadImage(file, () => {this.loadedAssets++;});
             if(isDebug){
-                console.log(file);
+                console.log('name: '+name + ' file: '+file);
             }
         });
         //loading player sprites
         playerSpriteNames.forEach((name) => {
             let file = spritePersonaPath+playerSpritePrefix+name+spriteFormat;
-            playerSpriteFiles[name] = loadImage(file, () => {this.loadedAssets++;});
+            playerSpriteFiles[playerSpritePrefix+name] = loadImage(file, () => {this.loadedAssets++;});
             if(isDebug){
-                console.log(file);
+                console.log('name: '+name + ' file: '+file);
+            }
+        });
+        //loading icons sprites
+        iconsSpriteNames.forEach((name) => {
+            let file = spriteIconsPath+name+spriteFormat;
+            iconsSpiteFiles[name] = loadImage(file, () => {this.loadedAssets++;});
+            if(isDebug){
+                console.log('name: '+name + ' file: '+file);
             }
         });
         //loading scenary sprites
         scenarySpriteNames.forEach((name) => {
             let file = spriteScenaryPath+scenarySpritePrefix+name+spriteFormat;
             scenarySpriteFiles.push(loadImage(file, () => {this.loadedAssets++;}));
-            if(isDebug){
-                console.log(file);
-            }
-        });
-        //loading icons sprites
-        iconsSpriteNames.forEach((name) => {
-            let file = spriteIconPath+name+spriteFormat;
-            iconsSpiteFiles.push(loadImage(file, () => {this.loadedAssets++;}));
             if(isDebug){
                 console.log(file);
             }
@@ -85,7 +85,7 @@ class Game{
             let file = soundPath+soundEffectPath+name;
             soundEffectFiles[name] = loadSound(file, () => {this.loadedAssets++;});
             if(isDebug){
-                console.log(file);
+                console.log('name: '+name + ' file: '+file);
             }
         });
         //loading sound effects
@@ -164,6 +164,9 @@ class Game{
         scenaries[0].draw();
         scenaries[1].draw();
         //Middle draw
+        itens.forEach((item) => {
+            item.draw();
+        });
         player.draw();
         enemies.forEach((enemy) => {
             enemy.draw();
@@ -177,10 +180,15 @@ class Game{
     move(){
         player.pointCounter();
         let direction = player.move();
+        
+        itens.forEach((item) => {
+            item.move(direction, player.velocity);
+        });
 
         scenaries.forEach((item) => {
             item.move(direction, player.velocity);
         });
+        
         enemies.forEach((enemy) => {
             enemy.move(direction, player.velocity);
         });
@@ -190,7 +198,8 @@ class Game{
         this.playerCoins.update(player.getCoins());
     }
     _createGame(){
-        player = new Player(playerSpriteNames[0], 100, height);
+        player = new Player(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, 100, height);
+
         this.hearthGroup = new HearthGroup(player.getLifeMax());
         this.playerPoints = new PointMark('Km', 30, 100);
         this.playerCoins = new PointMark('Moedas', 30, 130);
@@ -201,6 +210,16 @@ class Game{
                     new Scenary(scenarySpriteFiles[2], height*95/100, width, height/15*2, 4)
                 ];
 
-        enemies[0] = new Enemy(playerSpriteNames[0], width, height);
+        enemies[0] = new Enemy(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, width, height);
+
+        
+        this.createItens();
+    }
+    createItens(){
+        let itemCalls = [
+                            () => { player.addCoins(); sounds.powerUp('good');}
+                        ];
+        itens[0] = new Iten(iconsSpriteNames[0], iconsSpiteFiles, width, 400, 5, itemCalls[0]);
+        itens[1] = new Iten(iconsSpriteNames[0], iconsSpiteFiles, width+100, 400, 5, itemCalls);
     }
 }

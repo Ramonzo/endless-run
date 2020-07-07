@@ -44,6 +44,11 @@ class Sounds{
             }
         }
     }
+    powerUp(type){
+        if(this.isPlaying){
+            this.effectFiles[type+'_powerup'].play();
+        }
+    }
     playerJump(){
         if(this.isPlaying){
             this.effectFiles['jump'].play();

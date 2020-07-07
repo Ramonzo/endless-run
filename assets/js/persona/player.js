@@ -1,7 +1,7 @@
 class Player extends Animation{
-    constructor(sprite, x, y){
+    constructor(sprite, spriteFile, x, y){
         //Object Variables
-        super(sprite, x, y, [.3, .6]);
+        super(sprite, spriteFile, x, y, [.3, .6]);
         this.initialX = this.x;
         this.initialY = this.y;
         this.lifeMax = 3;
@@ -10,6 +10,7 @@ class Player extends Animation{
         this.coins = 0;
         this.bufferPoints = 0;
         this.velocity = 0;
+        this.initialVelocity = 3;
         this.velocityMove = 3;
         this.jumpCount = 0;
         this.jumpMax = 2;
@@ -19,13 +20,15 @@ class Player extends Animation{
         this.startTime = millis();
         this.stamina = 100;
         this.canRun = true;
+        this.running = false;
         this.lastHundred = 0;
-        this.collidedEnemies = [];
+        this.collided = [];
     }
     draw(){
         this.render();
         this.applyGravity();
 
+        //pause control
         if(state == stateGroup[3]){
             this.startTime = millis();
             this.bufferPoints = this.points;
@@ -63,18 +66,22 @@ class Player extends Animation{
     }
     move(){
         this.collision();
+        
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
                 if(this.stamina > 0){
                     this.stamina--;
                     this.x = this.x + this.velocityMove;
+                    this.running = true;
                     return this.velocityMove;
                 }
                 else{
                     this.canRun = false;
+                    this.running = false;
                 }
             }
         }else{
+            this.running = false;
             if(this.stamina < 100){
                 this.stamina += .5
             }else{
@@ -87,8 +94,7 @@ class Player extends Animation{
         }
         return 0;
     }
-    pointCounter(){
-        this.velocity = this.velocity < 100 ? parseInt(this.points/(1000+(this.velocity*10)))+this.velocityMove : 100;
+    pointCounter(){  
         let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
         this.points = int(newPoint*100)+this.bufferPoints;
         if(this.points >= 1000){
@@ -106,6 +112,19 @@ class Player extends Animation{
                 this.lastHundred = int(this.points/100);
             }
         }
+        if(this.running == true){
+            this.velocity = this.velocity < 100 ? 
+                this.initialVelocity + parseInt(this.points/(1000+(this.velocity*10))) + this.velocityMove : 100;
+        }else{
+            this.velocity = this.velocity < 100 ? 
+                this.initialVelocity + parseInt(this.points/(1000+(this.velocity*10))) : 100;
+        }
+    }
+    addCoins(value = 1){
+        this.coins += value;
+    }
+    addLife(value = 1){
+        this.life += value;
     }
     getPoints(){
         return this.points;
@@ -121,21 +140,39 @@ class Player extends Animation{
     }
     collision(){
         enemies.forEach(enemy => {
-            if(this.collidedEnemies.find(element => element == enemy) == undefined){
-                if(this.x + this.getCollisionBox()[0] > enemy.x - enemy.getCollisionBox()[0] &&
-                this.x - this.getCollisionBox()[0] < enemy.x + enemy.getCollisionBox()[0] && 
-                this.y + this.getCollisionBox()[1] > enemy.y - enemy.getCollisionBox()[1] &&
-                this.y - this.getCollisionBox()[1] < enemy.y + enemy.getCollisionBox()[1]){
+            if(this.collided.find(element => element == enemy) == undefined){
+                if(this.x + (this.getCollisionBox()[0]/2) > enemy.x - (enemy.getCollisionBox()[0]/2) &&
+                this.x - (this.getCollisionBox()[0]/2) < enemy.x + (enemy.getCollisionBox()[0]/2) && 
+                this.y + (this.getCollisionBox()[1]/2) > enemy.y - (enemy.getCollisionBox()[1]/2) &&
+                this.y - (this.getCollisionBox()[1]/2) < enemy.y + (enemy.getCollisionBox()[1]/2)){
                     sounds.personaDeath();
-                    this.collidedEnemies.push(enemy);
+                    this.collided.push(enemy);
                     this.life--;
                 }
             }else{
-                if(!(this.x + this.getCollisionBox()[0] > enemy.x - enemy.getCollisionBox()[0] &&
-                this.x - this.getCollisionBox()[0] < enemy.x + enemy.getCollisionBox()[0] && 
-                this.y + this.getCollisionBox()[1] > enemy.y - enemy.getCollisionBox()[1] &&
-                this.y - this.getCollisionBox()[1] < enemy.y + enemy.getCollisionBox()[1])){
-                    this.collidedEnemies.splice(this.collidedEnemies.indexOf(this.collidedEnemies.find(element => element == enemy), 1));
+                if(!(this.x + (this.getCollisionBox()[0]/2) > enemy.x - (enemy.getCollisionBox()[0]/2) &&
+                this.x - (this.getCollisionBox()[0]/2) < enemy.x + (enemy.getCollisionBox()[0]/2) && 
+                this.y + (this.getCollisionBox()[1]/2) > enemy.y - (enemy.getCollisionBox()[1]/2) &&
+                this.y - (this.getCollisionBox()[1]/2) < enemy.y + (enemy.getCollisionBox()[1]/2))){
+                    this.collided.splice(this.collided.indexOf(this.collided.find(element => element == enemy), 1));
+                }
+            }
+        });
+        itens.forEach(item => {
+            if(this.collided.find(element => element == item) == undefined){
+                if(this.x + (this.getCollisionBox()[0]/2) > item.x - (item.getCollisionBox()[0]/2) &&
+                this.x - (this.getCollisionBox()[0]/2) < item.x + (item.getCollisionBox()[0]/2) && 
+                this.y + (this.getCollisionBox()[1]/2) > item.y - (item.getCollisionBox()[1]/2) &&
+                this.y - (this.getCollisionBox()[1]/2) < item.y + (item.getCollisionBox()[1]/2)){
+                    item.doAction();
+                    this.collided.push(item);
+                }
+            }else{
+                if(!(this.x + this.getCollisionBox()[0] > item.x - (item.getCollisionBox()[0]/2) &&
+                this.x - (this.getCollisionBox()[0]/2) < item.x + (item.getCollisionBox()[0]/2) && 
+                this.y + (this.getCollisionBox()[1]/2) > item.y - (item.getCollisionBox()[1]/2) &&
+                this.y - (this.getCollisionBox()[1]/2) < item.y + (item.getCollisionBox()[1]/2))){
+                    this.collided.splice(this.collided.indexOf(this.collided.find(element => element == item), 1));
                 }
             }
         });

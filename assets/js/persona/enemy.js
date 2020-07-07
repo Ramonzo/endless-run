@@ -1,13 +1,13 @@
 class Enemy extends Animation{
-    constructor(sprite, x, y){
-        super(sprite, x, y, [.3, .6]);
+    constructor(sprite, spriteFile, x, y){
+        super(sprite, spriteFile, x, y, [.3, .6]);
         this.velocity = 3;
     }
     draw(){
         this.render();
     }
-    move(direction){
-        this.x = this.x - (this.velocity + player.velocity + direction);
+    move(direction, velocity){
+        this.x = this.x - (this.velocity + velocity + direction);
         if(this.x < 0){
             this.x = width;
         }

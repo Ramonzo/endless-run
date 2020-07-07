@@ -1,12 +1,13 @@
 //
 //To game
 //
-let difficulty = ['easy', 'medium', 'hard'];
+//let difficulty = ['easy', 'medium', 'hard'];
 let isDebug = true;
 let canvas;
 let game;
 let player;
 let enemies = [];
+let itens = [];
 let scenaries;
 
 let stateGroup = [
@@ -31,44 +32,166 @@ fontFiles = [];
 //Sprite Files
 //
 let spriteFormat = '.png';
-let spritePersonaPath = 'assets/sprites/persona/';
-let spriteScenaryPath = 'assets/sprites/nature/';
-let spriteIconPath = 'assets/sprites/icons/';
+let spritePath = 'assets/sprites/';
+let spritePersonaPath = spritePath+'persona/';
+let spriteScenaryPath = spritePath+'nature/';
+let spriteIconsPath = spritePath+'icons/';
 //Player
 let playerSpritePrefix = 'player_';
 let playerSpriteNames = [
                             'default'
                         ];
 let skinParameters = {
-                        'default':{
-                                    'walk':{
-                                        'w':76, 
-                                        'h':78,
-                                        'positionX': 38,
-                                        'positionY': 124,
-                                        'spriteW': 38,
-                                        'spriteH': 39,
-                                        'frames': 8
-                                    },
-                                    'jump':{
-                                        'w':76, 
-                                        'h':78,
-                                        'positionX': 0,
-                                        'positionY': 244,
-                                        'spriteW': 38,
-                                        'spriteH': 39,
-                                        'frames': 1
-                                    },
-                                    'falling':{
-                                        'w':76, 
-                                        'h':78,
-                                        'positionX': 39,
-                                        'positionY': 244,
-                                        'spriteW': 38,
-                                        'spriteH': 48,
-                                        'frames': 1
-                                    }
-                                }
+                        'player_default':{
+                                            'walk':{
+                                                'w':76, 
+                                                'h':78,
+                                                'positionX': 38,
+                                                'positionY': 124,
+                                                'spriteW': 38,
+                                                'spriteH': 39,
+                                                'frames': 8
+                                            },
+                                            'jump':{
+                                                'w':76, 
+                                                'h':78,
+                                                'positionX': 0,
+                                                'positionY': 244,
+                                                'spriteW': 38,
+                                                'spriteH': 39,
+                                                'frames': 1
+                                            },
+                                            'falling':{
+                                                'w':76, 
+                                                'h':78,
+                                                'positionX': 39,
+                                                'positionY': 244,
+                                                'spriteW': 38,
+                                                'spriteH': 48,
+                                                'frames': 1
+                                            }
+                                },
+                        'coin':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'fly':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'full_stamina':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'invencible_run':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'less_speed':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'more_speed':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'one_hearth_less':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'one_hearth_more':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'random':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'shild':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        },
+                        'weight':{
+                            'walk':{
+                                'w':50, 
+                                'h':50,
+                                'positionX': 0,
+                                'positionY': 0,
+                                'spriteW': 183,
+                                'spriteH': 179,
+                                'frames': 1
+                            }
+                        }
                     }
 let playerSpriteFiles = [];
 //Enemies

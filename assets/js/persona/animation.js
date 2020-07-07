@@ -1,7 +1,8 @@
 class Animation{
-    constructor(sprite, x, y, precision){
+    constructor(sprite, spriteFile, x, y, precision){
         this.actualAction = 'walk';
         this.spriteName = sprite;
+        this.spriteFile = spriteFile;
         this.sprite = skinParameters[this.spriteName];
         this.frameCount = 0;
         this.precision = precision;
@@ -10,7 +11,7 @@ class Animation{
     }
     render(){
         imageMode(CENTER);
-        image(playerSpriteFiles[this.spriteName], 
+        image(this.spriteFile[this.spriteName], 
             this.x, 
             this.y,
             this.sprite[this.actualAction]['w'],

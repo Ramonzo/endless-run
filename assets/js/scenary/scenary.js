@@ -13,9 +13,9 @@ class Scenary{
         image(this.image, this.x1, this.y, this.sizeX, this.sizeY);
         image(this.image, this.x2, this.y, this.sizeX, this.sizeY);
     }
-    move(direction){
-        this.x1 = this.x1 - (this.velocity + player.velocity + direction);
-        this.x2 = this.x2 - (this.velocity + player.velocity + direction);
+    move(direction, velocity){
+        this.x1 = this.x1 - (this.velocity + velocity + direction);
+        this.x2 = this.x2 - (this.velocity + velocity + direction);
         if (this.x1 < -(this.sizeX/2)){
             this.x1 = this.x2 + this.sizeX;
         }

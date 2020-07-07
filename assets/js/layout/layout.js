@@ -27,10 +27,10 @@ class HearthGroup{
     draw(){
         let diference = this.quantityTotal - this.actualHave;
         for(let i = 1; i <= this.actualHave; i++){
-            image(iconsSpiteFiles[7], 50*i, 50, 50, 50);
+            image(iconsSpiteFiles['one_hearth_more'], 50*i, 50, 50, 50);
         }
         for(let i = 1; i <= diference; i++){
-            image(iconsSpiteFiles[6], 50*(i+this.actualHave), 50, 50, 50);
+            image(iconsSpiteFiles['one_hearth_less'], 50*(i+this.actualHave), 50, 50, 50);
         }
     }
     update(actualHave){
