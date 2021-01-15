@@ -9,15 +9,15 @@ class Player extends Animation{
         this.points = 0;
         this.coins = 0;
         this.bufferPoints = 0;
-        this.velocity = 0;
-        this.initialVelocity = 3;
+        this.velocity = 1;
+        this.runVelocity = 2;
         this.velocityMove = 3;
         this.jumpCount = 0;
         this.jumpMax = 2;
         this.velocityJump = 0;
         this.velocityMax = 25;
         this.gravity = 3;
-        this.startTime = millis();
+        this.Timer = millis();
         this.stamina = 100;
         this.canRun = true;
         this.running = false;
@@ -66,24 +66,26 @@ class Player extends Animation{
     }
     move(){
         this.collision();
-        
+        this.velocity = this.velocity < 100 ? 
+                            this.velocityMove + parseInt(this.points/(1000+(this.velocity*10))) : 100;
         if(keyIsDown(68)){//key => d
             if(this.x + this.velocityMove >= this.initialX && this.x + this.velocityMove <= width/10*8 && this.canRun == true){
                 if(this.stamina > 0){
                     this.stamina--;
                     this.x = this.x + this.velocityMove;
                     this.running = true;
+                    this.bufferPoints = this.points;
                     return this.velocityMove;
                 }
                 else{
                     this.canRun = false;
                     this.running = false;
+                    this.Timer = millis();
                 }
             }
         }else{
-            this.running = false;
             if(this.stamina < 100){
-                this.stamina += .5
+                this.stamina += .5;
             }else{
                 this.canRun = true;
             }
@@ -94,9 +96,10 @@ class Player extends Animation{
         }
         return 0;
     }
-    pointCounter(){  
-        let newPoint = (this.velocity * ((millis()-this.startTime) / 60000))/2;
-        this.points = int(newPoint*100)+this.bufferPoints;
+    pointCounter(){
+        let newPoint = this.velocity * ((millis()-this.Timer) / 6000);
+        console.log("newPoint", newPoint)
+        this.points = this.bufferPoints+int(newPoint);
         if(this.points >= 1000){
             if(int(this.points/1000) > this.lastHundred){
 
@@ -111,13 +114,6 @@ class Player extends Animation{
 
                 this.lastHundred = int(this.points/100);
             }
-        }
-        if(this.running == true){
-            this.velocity = this.velocity < 100 ? 
-                this.initialVelocity + parseInt(this.points/(1000+(this.velocity*10))) + this.velocityMove : 100;
-        }else{
-            this.velocity = this.velocity < 100 ? 
-                this.initialVelocity + parseInt(this.points/(1000+(this.velocity*10))) : 100;
         }
     }
     addCoins(value = 1){

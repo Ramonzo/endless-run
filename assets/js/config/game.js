@@ -201,7 +201,7 @@ class Game{
         player = new Player(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, 100, height);
 
         this.hearthGroup = new HearthGroup(player.getLifeMax());
-        this.playerPoints = new PointMark('Km', 30, 100);
+        this.playerPoints = new PointMark('Metros', 30, 100);
         this.playerCoins = new PointMark('Moedas', 30, 130);
 
         scenaries = [

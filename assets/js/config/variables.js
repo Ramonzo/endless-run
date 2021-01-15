@@ -240,7 +240,6 @@ let iconsSpiteFiles = [];
 //
 //Sound Files
 //
-
 let soundFormat = 'wav';
 let soundPath = 'assets/sounds/';
 
