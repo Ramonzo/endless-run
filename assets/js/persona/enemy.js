@@ -1,6 +1,6 @@
 class Enemy extends Animation{
-    constructor(sprite, spriteFile, x, y){
-        super(sprite, spriteFile, x, y, [.3, .6]);
+    constructor(sprite, spriteFile, x, y, spritCrop){
+        super(sprite, spriteFile, x, y, spritCrop);
         this.velocity = 3;
     }
     draw(){

@@ -198,7 +198,7 @@ class Game{
         this.playerCoins.update(player.getCoins());
     }
     _createGame(){
-        player = new Player(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, 100, height);
+        player = new Player(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, 100, height, [.3, .6]);
 
         this.hearthGroup = new HearthGroup(player.getLifeMax());
         this.playerPoints = new PointMark('Metros', 30, 100);
@@ -210,7 +210,9 @@ class Game{
                     new Scenary(scenarySpriteFiles[2], height*95/100, width, height/15*2, 4)
                 ];
 
-        enemies[0] = new Enemy(playerSpritePrefix+playerSpriteNames[0], playerSpriteFiles, width, height);
+        enemies = [
+                    new Enemy(iconsSpriteNames[0], iconsSpiteFiles, width, height, [.3, .6])
+                ];
 
         
         this.createItens();

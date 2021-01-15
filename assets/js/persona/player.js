@@ -1,7 +1,7 @@
 class Player extends Animation{
-    constructor(sprite, spriteFile, x, y){
+    constructor(sprite, spriteFile, x, y, spritCrop){
         //Object Variables
-        super(sprite, spriteFile, x, y, [.3, .6]);
+        super(sprite, spriteFile, x, y, spritCrop);
         this.initialX = this.x;
         this.initialY = this.y;
         this.lifeMax = 3;
